@@ -7,18 +7,23 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Pedido
  * 
  * @property int $ID_PEDIDO
- * @property Carbon $FECHA_DE_COMPRA
- * @property Carbon $FECHA_DE_ENTREGA
- * @property int $TOTAL_DE_PAGO
- * @property string $ESTADO_PEDIDO
- * @property Carbon $CREATED_AT
- * @property Carbon $UPDATED_AT
+ * @property Carbon $Fecha_de_compra
+ * @property Carbon $Fecha_de_entrega
+ * @property int $Total_de_pago
+ * @property string $Estado_pedido
+ * @property Carbon $Created_at
+ * @property Carbon $Updated_at
+ * 
+ * @property Collection|Producto[] $productos
+ * @property Collection|Usuario[] $usuarios
+ * @property Collection|Ventum[] $venta
  *
  * @package App\Models
  */
@@ -29,19 +34,36 @@ class Pedido extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'FECHA_DE_COMPRA' => 'datetime',
-		'FECHA_DE_ENTREGA' => 'datetime',
-		'TOTAL_DE_PAGO' => 'int',
-		'CREATED_AT' => 'datetime',
-		'UPDATED_AT' => 'datetime'
+		'Fecha_de_compra' => 'datetime',
+		'Fecha_de_entrega' => 'datetime',
+		'Total_de_pago' => 'int',
+		'Created_at' => 'datetime',
+		'Updated_at' => 'datetime'
 	];
 
 	protected $fillable = [
-		'FECHA_DE_COMPRA',
-		'FECHA_DE_ENTREGA',
-		'TOTAL_DE_PAGO',
-		'ESTADO_PEDIDO',
-		'CREATED_AT',
-		'UPDATED_AT'
+		'Fecha_de_compra',
+		'Fecha_de_entrega',
+		'Total_de_pago',
+		'Estado_pedido',
+		'Created_at',
+		'Updated_at'
 	];
+
+	public function productos()
+	{
+		return $this->belongsToMany(Producto::class, 'pedido_has_producto')
+					->withPivot('ID_PEDIDO_PRODUCTO');
+	}
+
+	public function usuarios()
+	{
+		return $this->belongsToMany(Usuario::class, 'usuarios_has_pedido', 'pedido_id', 'usuarios_id')
+					->withPivot('ID_PEDIDO_CLIENTE');
+	}
+
+	public function venta()
+	{
+		return $this->hasMany(Ventum::class);
+	}
 }

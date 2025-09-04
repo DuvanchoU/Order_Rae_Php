@@ -14,12 +14,6 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                
             <tr>
-                <th scope="col" class="p-4">
-                    <div class="flex items-center">
-                        <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                    </div>
-                </th>
                 <th scope="col" class="px-6 py-3">REFERENCIA</th>
                 <th scope="col" class="px-6 py-3">CATEGORIA</th>
                 <th scope="col" class="px-6 py-3">COLOR</th>
@@ -32,14 +26,14 @@
         <tbody>
         @foreach($inventario as $item)
         <tr class="bg-white border-b">
-        <td class="px-6 py-4">{{ $item->REFERENCIA_PRODUCTO }}</td>
-        <td class="px-6 py-4">{{ $item->CATEGORIA_PRODUCTO }}</td>
-        <td class="px-6 py-4">{{ $item->COLOR_PRODUCTO }}</td>
-        <td class="px-6 py-4">{{ $item->CANTIDAD_PRODUCTO }}</td>
-        <td class="px-6 py-4">{{ $item->ESTADO_PRODUCTO }}</td>
-        <td class="flex items-center px-6 py-4">
-            <a href="#" class="text-blue-600 hover:underline">Editar</a>
-            <a href="#" class="text-red-600 hover:underline ms-3">Eliminar</a>
+        <td class="px-6 py-4">{{ $item->Referencia_producto }}</td>
+        <td class="px-6 py-4">{{ $item->Categoria_producto }}</td>
+        <td class="px-6 py-4">{{ $item->Color_producto }}</td>
+        <td class="px-6 py-4">{{ $item->Cantidad_producto }}</td>
+        <td class="px-6 py-4">{{ $item->Estado_producto }}</td>
+        <td class="flex items-center px-6 py-4 gap-2">
+            <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md py-2 px-4">Editar</a>
+            <a href="#" class="bg-red-600 hover:bg-red-700 text-white font-bold rounded-md py-2 px-4">Eliminar</a>
         </td>
     </tr>
     @endforeach

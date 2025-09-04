@@ -6,13 +6,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Role
  * 
  * @property int $ID_ROL
- * @property string $CARGO
+ * @property string $Cargo
+ * 
+ * @property Collection|Permiso[] $permisos
+ * @property Collection|Usuario[] $usuarios
  *
  * @package App\Models
  */
@@ -28,6 +32,17 @@ class Role extends Model
 	];
 
 	protected $fillable = [
-		'CARGO'
+		'Cargo'
 	];
+
+	public function permisos()
+	{
+		return $this->belongsToMany(Permiso::class, 'permisos_has_roles', 'roles_id', 'permisos_id')
+					->withPivot('ID_PERMISOS_ROL');
+	}
+
+	public function usuarios()
+	{
+		return $this->hasMany(Usuario::class, 'roles_id');
+	}
 }

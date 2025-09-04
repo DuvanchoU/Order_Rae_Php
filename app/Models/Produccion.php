@@ -13,17 +13,20 @@ use Illuminate\Database\Eloquent\Model;
  * Class Produccion
  * 
  * @property int $ID_PRODUCCION
- * @property string $REFERENCIA_PRODUCTO
- * @property string $CATEGORIA_PRODUCTO
- * @property string $MATERIAL_PRODUCTO
- * @property string $TIPO_DE_PRODUCTO
- * @property string $COLOR_PRODUCTO
- * @property string $CANTIDAD_PRODUCTO
- * @property string $ESTADO_PRODUCTO
- * @property Carbon $CREATED_AT
- * @property Carbon $UPDATED_AT
- * @property int $USUARIOS_ID
- * @property int $PRODUCTO_ID
+ * @property string $Codigo_producto
+ * @property string $Categoria_producto
+ * @property string $Material_producto
+ * @property string $Tipo_de_producto
+ * @property string $Color_producto
+ * @property int $Cantidad_producto
+ * @property string $Estado_producto
+ * @property Carbon $Created_at
+ * @property Carbon $Updated_at
+ * @property int $usuarios_id
+ * @property int $producto_id
+ * 
+ * @property Usuario $usuario
+ * @property Producto $producto
  *
  * @package App\Models
  */
@@ -34,23 +37,34 @@ class Produccion extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'CREATED_AT' => 'datetime',
-		'UPDATED_AT' => 'datetime',
-		'USUARIOS_ID' => 'int',
-		'PRODUCTO_ID' => 'int'
+		'Cantidad_producto' => 'int',
+		'Created_at' => 'datetime',
+		'Updated_at' => 'datetime',
+		'usuarios_id' => 'int',
+		'producto_id' => 'int'
 	];
 
 	protected $fillable = [
-		'REFERENCIA_PRODUCTO',
-		'CATEGORIA_PRODUCTO',
-		'MATERIAL_PRODUCTO',
-		'TIPO_DE_PRODUCTO',
-		'COLOR_PRODUCTO',
-		'CANTIDAD_PRODUCTO',
-		'ESTADO_PRODUCTO',
-		'CREATED_AT',
-		'UPDATED_AT',
-		'USUARIOS_ID',
-		'PRODUCTO_ID'
+		'Codigo_producto',
+		'Categoria_producto',
+		'Material_producto',
+		'Tipo_de_producto',
+		'Color_producto',
+		'Cantidad_producto',
+		'Estado_producto',
+		'Created_at',
+		'Updated_at',
+		'usuarios_id',
+		'producto_id'
 	];
+
+	public function usuario()
+	{
+		return $this->belongsTo(Usuario::class, 'usuarios_id');
+	}
+
+	public function producto()
+	{
+		return $this->belongsTo(Producto::class);
+	}
 }

@@ -12,8 +12,11 @@ use Illuminate\Database\Eloquent\Model;
  * Class ProductoHasVentum
  * 
  * @property int $ID_PRODUCTO_HAS_VENTA
- * @property int $VENTA_ID
- * @property int $PRODUCTO_ID
+ * @property int $venta_id
+ * @property int $producto_id
+ * 
+ * @property Producto $producto
+ * @property Ventum $ventum
  *
  * @package App\Models
  */
@@ -24,12 +27,22 @@ class ProductoHasVentum extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'VENTA_ID' => 'int',
-		'PRODUCTO_ID' => 'int'
+		'venta_id' => 'int',
+		'producto_id' => 'int'
 	];
 
 	protected $fillable = [
-		'VENTA_ID',
-		'PRODUCTO_ID'
+		'venta_id',
+		'producto_id'
 	];
+
+	public function producto()
+	{
+		return $this->belongsTo(Producto::class);
+	}
+
+	public function ventum()
+	{
+		return $this->belongsTo(Ventum::class, 'venta_id');
+	}
 }

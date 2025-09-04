@@ -7,20 +7,24 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Inventario
  * 
  * @property int $ID_INVENTARIO
- * @property string $REFERENCIA_PRODUCTO
- * @property string $CATEGORIA_PRODUCTO
- * @property string $COLOR_PRODUCTO
- * @property string $CANTIDAD_PRODUCTO
- * @property string $ESTADO_PRODUCTO
- * @property Carbon $CREATED_AD
- * @property Carbon $UPDATED_AD
- * @property int $USUARIOS_ID
+ * @property string $Referencia_producto
+ * @property string $Categoria_producto
+ * @property string $Color_producto
+ * @property string $Cantidad_producto
+ * @property string $Estado_producto
+ * @property Carbon $Created_at
+ * @property Carbon $Updated_at
+ * @property int $usuarios_id
+ * 
+ * @property Usuario $usuario
+ * @property Collection|Producto[] $productos
  *
  * @package App\Models
  */
@@ -31,19 +35,29 @@ class Inventario extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'CREATED_AD' => 'datetime',
-		'UPDATED_AD' => 'datetime',
-		'USUARIOS_ID' => 'int'
+		'Created_at' => 'datetime',
+		'Updated_at' => 'datetime',
+		'usuarios_id' => 'int'
 	];
 
 	protected $fillable = [
-		'REFERENCIA_PRODUCTO',
-		'CATEGORIA_PRODUCTO',
-		'COLOR_PRODUCTO',
-		'CANTIDAD_PRODUCTO',
-		'ESTADO_PRODUCTO',
-		'CREATED_AD',
-		'UPDATED_AD',
-		'USUARIOS_ID'
+		'Referencia_producto',
+		'Categoria_producto',
+		'Color_producto',
+		'Cantidad_producto',
+		'Estado_producto',
+		'Created_at',
+		'Updated_at',
+		'usuarios_id'
 	];
+
+	public function usuario()
+	{
+		return $this->belongsTo(Usuario::class, 'usuarios_id');
+	}
+
+	public function productos()
+	{
+		return $this->hasMany(Producto::class);
+	}
 }

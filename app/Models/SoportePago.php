@@ -13,14 +13,17 @@ use Illuminate\Database\Eloquent\Model;
  * Class SoportePago
  * 
  * @property int $ID_SOPORTE_PAGO
- * @property Carbon $HORA_PAGO
- * @property Carbon $FECHA_PAGO
- * @property int $TOTAL_PAGO
- * @property string $SOPORTE_PAGO
- * @property Carbon $CREATED_AT
- * @property Carbon $UPDATE_AT
- * @property int $USUARIO_ID
- * @property int $VENTA_ID
+ * @property Carbon $Hora_pago
+ * @property Carbon $Fecha_pago
+ * @property float $Total_pago
+ * @property string $Soporte_url
+ * @property Carbon $Created_at
+ * @property Carbon $Updated_at
+ * @property int $usuarios_id
+ * @property int $venta_id
+ * 
+ * @property Usuario $usuario
+ * @property Ventum $ventum
  *
  * @package App\Models
  */
@@ -31,23 +34,33 @@ class SoportePago extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'HORA_PAGO' => 'datetime',
-		'FECHA_PAGO' => 'datetime',
-		'TOTAL_PAGO' => 'int',
-		'CREATED_AT' => 'datetime',
-		'UPDATE_AT' => 'datetime',
-		'USUARIO_ID' => 'int',
-		'VENTA_ID' => 'int'
+		'Hora_pago' => 'datetime',
+		'Fecha_pago' => 'datetime',
+		'Total_pago' => 'float',
+		'Created_at' => 'datetime',
+		'Updated_at' => 'datetime',
+		'usuarios_id' => 'int',
+		'venta_id' => 'int'
 	];
 
 	protected $fillable = [
-		'HORA_PAGO',
-		'FECHA_PAGO',
-		'TOTAL_PAGO',
-		'SOPORTE_PAGO',
-		'CREATED_AT',
-		'UPDATE_AT',
-		'USUARIO_ID',
-		'VENTA_ID'
+		'Hora_pago',
+		'Fecha_pago',
+		'Total_pago',
+		'Soporte_url',
+		'Created_at',
+		'Updated_at',
+		'usuarios_id',
+		'venta_id'
 	];
+
+	public function usuario()
+	{
+		return $this->belongsTo(Usuario::class, 'usuarios_id');
+	}
+
+	public function ventum()
+	{
+		return $this->belongsTo(Ventum::class, 'venta_id');
+	}
 }

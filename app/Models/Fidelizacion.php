@@ -7,17 +7,21 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Fidelizacion
  * 
  * @property int $ID_FIDELIZACION
- * @property Carbon $FECHA_DE_FIDELIZACION
- * @property int $TOTAL_DEL_PRODUCTO
- * @property Carbon $CREATED_AT
- * @property Carbon $UPDATED_AT
- * @property int $USUARIOS_ID
+ * @property Carbon $Fecha_de_fidelizacion
+ * @property int $Total_de_producto
+ * @property Carbon $Created_at
+ * @property Carbon $Updated_at
+ * @property int $usuarios_id
+ * 
+ * @property Usuario $usuario
+ * @property Collection|Ventum[] $venta
  *
  * @package App\Models
  */
@@ -28,18 +32,28 @@ class Fidelizacion extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'FECHA_DE_FIDELIZACION' => 'datetime',
-		'TOTAL_DEL_PRODUCTO' => 'int',
-		'CREATED_AT' => 'datetime',
-		'UPDATED_AT' => 'datetime',
-		'USUARIOS_ID' => 'int'
+		'Fecha_de_fidelizacion' => 'datetime',
+		'Total_de_producto' => 'int',
+		'Created_at' => 'datetime',
+		'Updated_at' => 'datetime',
+		'usuarios_id' => 'int'
 	];
 
 	protected $fillable = [
-		'FECHA_DE_FIDELIZACION',
-		'TOTAL_DEL_PRODUCTO',
-		'CREATED_AT',
-		'UPDATED_AT',
-		'USUARIOS_ID'
+		'Fecha_de_fidelizacion',
+		'Total_de_producto',
+		'Created_at',
+		'Updated_at',
+		'usuarios_id'
 	];
+
+	public function usuario()
+	{
+		return $this->belongsTo(Usuario::class, 'usuarios_id');
+	}
+
+	public function venta()
+	{
+		return $this->hasMany(Ventum::class);
+	}
 }

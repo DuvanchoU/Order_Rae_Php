@@ -9,36 +9,36 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class VentaHasUsuario
+ * Class UsuariosHasPedido
  * 
- * @property int $ID_VENTA_ASESOR
- * @property int $venta_id
+ * @property int $ID_PEDIDO_CLIENTE
+ * @property int $pedido_id
  * @property int $usuarios_id
  * 
- * @property Ventum $ventum
+ * @property Pedido $pedido
  * @property Usuario $usuario
  *
  * @package App\Models
  */
-class VentaHasUsuario extends Model
+class UsuariosHasPedido extends Model
 {
-	protected $table = 'venta_has_usuarios';
-	protected $primaryKey = 'ID_VENTA_ASESOR';
+	protected $table = 'usuarios_has_pedido';
+	protected $primaryKey = 'ID_PEDIDO_CLIENTE';
 	public $timestamps = false;
 
 	protected $casts = [
-		'venta_id' => 'int',
+		'pedido_id' => 'int',
 		'usuarios_id' => 'int'
 	];
 
 	protected $fillable = [
-		'venta_id',
+		'pedido_id',
 		'usuarios_id'
 	];
 
-	public function ventum()
+	public function pedido()
 	{
-		return $this->belongsTo(Ventum::class, 'venta_id');
+		return $this->belongsTo(Pedido::class);
 	}
 
 	public function usuario()

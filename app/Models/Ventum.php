@@ -6,19 +6,27 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Ventum
  * 
  * @property int $ID_VENTA
- * @property string $NOMBRE_PRODUCTO
- * @property string $CATEGORIA_PRODUCTO
- * @property string $COLOR_PRODUCTO
- * @property float $VALOR_UNITARIO
- * @property float $TOTAL_DETALLE
- * @property int $PEDIDO_ID
- * @property int $FIDELIZACION_ID
+ * @property string $Nombre_producto
+ * @property string $Categoria_producto
+ * @property string $Color_producto
+ * @property int $pedido_id
+ * @property int $fidelizacion_id
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * 
+ * @property Fidelizacion $fidelizacion
+ * @property Pedido $pedido
+ * @property Collection|ProductoHasVentum[] $producto_has_venta
+ * @property Collection|SoportePago[] $soporte_pagos
+ * @property Collection|VentaHasUsuario[] $venta_has_usuarios
  *
  * @package App\Models
  */
@@ -26,22 +34,42 @@ class Ventum extends Model
 {
 	protected $table = 'venta';
 	protected $primaryKey = 'ID_VENTA';
-	public $timestamps = false;
 
 	protected $casts = [
-		'VALOR_UNITARIO' => 'float',
-		'TOTAL_DETALLE' => 'float',
-		'PEDIDO_ID' => 'int',
-		'FIDELIZACION_ID' => 'int'
+		'pedido_id' => 'int',
+		'fidelizacion_id' => 'int'
 	];
 
 	protected $fillable = [
-		'NOMBRE_PRODUCTO',
-		'CATEGORIA_PRODUCTO',
-		'COLOR_PRODUCTO',
-		'VALOR_UNITARIO',
-		'TOTAL_DETALLE',
-		'PEDIDO_ID',
-		'FIDELIZACION_ID'
+		'Nombre_producto',
+		'Categoria_producto',
+		'Color_producto',
+		'pedido_id',
+		'fidelizacion_id'
 	];
+
+	public function fidelizacion()
+	{
+		return $this->belongsTo(Fidelizacion::class);
+	}
+
+	public function pedido()
+	{
+		return $this->belongsTo(Pedido::class);
+	}
+
+	public function producto_has_venta()
+	{
+		return $this->hasMany(ProductoHasVentum::class, 'venta_id');
+	}
+
+	public function soporte_pagos()
+	{
+		return $this->hasMany(SoportePago::class, 'venta_id');
+	}
+
+	public function venta_has_usuarios()
+	{
+		return $this->hasMany(VentaHasUsuario::class, 'venta_id');
+	}
 }
