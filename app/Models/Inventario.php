@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $Color_producto
  * @property string $Cantidad_producto
  * @property string $Estado_producto
+ * @property string $Ubicacion_producto
  * @property Carbon $Created_at
  * @property Carbon $Updated_at
  * @property int $usuarios_id
@@ -45,6 +46,7 @@ class Inventario extends Model
 		'Categoria_producto',
 		'Color_producto',
 		'Cantidad_producto',
+		'Ubicacion_producto',
 		'Estado_producto',
 		'Created_at',
 		'Updated_at',

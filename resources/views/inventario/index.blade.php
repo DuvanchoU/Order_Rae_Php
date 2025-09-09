@@ -8,7 +8,13 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white">     
-
+               <!-- 🔹 Botón Agregar Producto -->
+            <div class="flex justify-end mb-4">
+            <a href="{{ route('inventario.create') }}"
+            class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">
+            ➕ Agregar
+            </a>
+            </div>
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
                     <table id="inventario" class="display w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -17,6 +23,7 @@
                                 <th scope="col" class="px-6 py-3">CATEGORIA</th>
                                 <th scope="col" class="px-6 py-3">COLOR</th>
                                 <th scope="col" class="px-6 py-3">CANTIDAD</th>
+                                <th scope="col" class="px-6 py-3">UBICACION</th>
                                 <th scope="col" class="px-6 py-3">ESTADO</th>
                                 <th scope="col" class="px-6 py-3">ACCIONES</th>
                             </tr>
@@ -28,6 +35,7 @@
                                     <td class="px-6 py-4">{{ $item->Categoria_producto }}</td>
                                     <td class="px-6 py-4">{{ $item->Color_producto }}</td>
                                     <td class="px-6 py-4">{{ $item->Cantidad_producto }}</td>
+                                    <td class="px-6 py-4">{{ $item->Ubicacion_producto }}</td>
                                     <td class="px-6 py-4">{{ $item->Estado_producto }}</td>
                                     <td class="flex items-center px-6 py-4 gap-2">
                                         <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md py-2 px-4">Editar</a>

@@ -23,7 +23,7 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('inventario.create');
     }
 
     /**
@@ -31,7 +31,19 @@ class InventarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'Referencia_producto' => 'required|string|max:255',
+        'Categoria_producto'  => 'required|string|max:255',
+        'Color_producto'      => 'required|string|max:100',
+        'Cantidad_producto'   => 'required|integer|min:1',
+        'Ubicacion_producto'  => 'required|string|max:255',
+        'Estado_producto'     => 'required|string|max:50',
+    ]);
+
+    Inventario::create($request->all());
+
+    return redirect()->route('inventario.index')
+                     ->with('success', 'Producto agregado correctamente.');
     }
 
     /**
